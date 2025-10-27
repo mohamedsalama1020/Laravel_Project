@@ -52,7 +52,7 @@
 </nav>
 
             <div style="text-align: center;">
-                 <h1>Add your offer</h1>
+                 <h1>{{ __('messages.addoffer') }}</h1>
             
             @if (Session::has('success'))
             
@@ -65,14 +65,14 @@
             <form method="POST" action="{{ route('offers.store') }}">
             @csrf
             <div class="form-group">
-                <label for="EnterOffer">offer Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                <label for="EnterOffer">{{ __('messages.offername') }}</label>
+                <input type="text" class="form-control" name="name" placeholder="{{__('messages.EnterName')}}">
                 @error('name')
                 <small class="form-text text-danger">{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="EnterOfferName">offer Price</label>
+                <label for="EnterOfferName">{{ __('messages.offerprice') }}</label>
                 <input type="text" class="form-control" name="price" placeholder="Price">
                  @error('price')
                 <small class="form-text text-danger">{{ $message }}</small>
@@ -80,7 +80,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="EnterOfferName">offer Details</label>
+                <label for="EnterOfferName">{{ __('messages.offerdetails') }}</label>
                 <input type="text" class="form-control" name="details" placeholder="Enter Details">
                 @error('details')
                 <small class="form-text text-danger">{{ $message }}</small>
@@ -88,7 +88,7 @@
                 @enderror
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">{{ __('messages.save')}}</button>
             </form>
             </div>
     </body>
