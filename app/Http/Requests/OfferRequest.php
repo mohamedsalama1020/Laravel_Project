@@ -20,11 +20,14 @@ class OfferRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
+
     {
+
+        $id = $this->route('id');
         return [
     
-            'name_ar'=>'required|max:100|unique:offers,name_ar',
-            'name_en'=>'required|max:100|unique:offers,name_en',
+            'name_ar'=>'required|max:100|unique:offers,name_ar,' .$id,
+            'name_en'=>'required|max:100|unique:offers,name_en,' .$id,
 
             'price'=>'required|numeric',
             'details_ar'=>'required',

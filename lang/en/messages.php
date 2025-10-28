@@ -15,6 +15,8 @@ return[
     "offerdetails_ar"=>'Offer Details in Arabic',
     "offername"=>'The Offer Name',
     "offerdetails"=>'Offer Details',
+    "edit"=>"Edit",
+    "updateoffer"=>'Edit offer',
 
     "EnterName"=>'Enter Name',
     "save"=>'Save'

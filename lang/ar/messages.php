@@ -15,6 +15,8 @@ return[
     "offerdetails_en"=>'تفاصيل العرض بالانجليزي',
     "offername"=>'اسم العرض',
     "offerdetails"=>'تفاصيل العرض',
+    "edit"=>'تعديل',
+    "updateoffer"=>'تعديل البيانات',
 
 
     "EnterName"=>'ادخل اسم',
