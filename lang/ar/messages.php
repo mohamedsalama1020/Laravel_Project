@@ -8,9 +8,15 @@ return[
     "offerPriceReq"=>'سعرالعرض مطلوب',
     "offerPriceNum"=>'السعر بالأرقام فقط',
     "addoffer"=>'اضافة عرض',
-    "offername"=>'اسم العرض',
+    "offername_ar"=>'اسم العرض بالعربي',
+    "offername_en"=>'اسم العرض بالإنجليزي',
     "offerprice"=>'سعر العرض',
+    "offerdetails_ar"=>'تفاصيل العرض',
+    "offerdetails_en"=>'تفاصيل العرض بالانجليزي',
+    "offername"=>'اسم العرض',
     "offerdetails"=>'تفاصيل العرض',
+
+
     "EnterName"=>'ادخل اسم',
     "save"=>'حفظ'
 

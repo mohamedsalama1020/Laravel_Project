@@ -36,6 +36,7 @@ Route::group(
         Route::group(['prefix' => 'offers'], function () {
             Route::get('create', [OfferController::class, 'create'])->name('offers.create');
             Route::post('store', [OfferController::class, 'store'])->name('offers.store');
+            Route::get('show',[OfferController::class,'show']);
         });
     }
 );

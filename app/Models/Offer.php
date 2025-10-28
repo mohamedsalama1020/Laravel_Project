@@ -13,9 +13,11 @@ class Offer extends Model
      */
     protected $fillable = [
         'id',
-        'name',
+        'name_ar',
+        'name_en',
         'price',
-        'details',
+        'details_en',
+        'details_ar',
         
     ];
 

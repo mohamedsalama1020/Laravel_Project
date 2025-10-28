@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Validator;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization as FacadesLaravelLocalization;
+use Mcamara\LaravelLocalization\LaravelLocalization as LaravelLocalizationLaravelLocalization;
 
 class OfferController extends Controller
 {
@@ -17,41 +18,28 @@ class OfferController extends Controller
         return view('offers.create');
 
         }
-            public function store(Request $request){
-
-        $rules=[
-            'name'=>'required|max:100|unique:offers,name',
-            'price'=>'required|numeric',
-            'details'=>'required',];
-
-           $messages= $this->getMessages();
-            $validator = Validator::make($request->all(),$rules,$messages);
+    public function store(OfferRequest $request){
         
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInputs($request->all());
-
-        }
-       
-    
-
         Offer::create([
-            'name'=>$request->name,
+            'name_ar'=>$request->name_ar,
+            'name_en'=>$request->name_en,
             'price'=>$request->price,
-            'details'=>$request->details,
+            'details_en'=>$request->details_en,
+            'details_ar'=>$request->details_ar,
 
         ]);
          return redirect()->back()->with(['success'=>'The offer is done']);   
+   
     }
-    
-
-    protected function getMessages(){
-
-         return   [
-                'name.required'=>__('messages.offerNameReq'),
-                'name.unique'=>trans('messages.offerNameUni'),
-                'price.required'=>__('messages.offerPriceReq'),
-
-                'price.numeric'=>__('messages.offerPriceNum'),
-            ];
+    public function show(){
+        $offers = Offer::select('id',
+        'name_' .FacadesLaravelLocalization::getCurrentLocale() . ' as name',
+        'price',
+        'details_' .FacadesLaravelLocalization::getCurrentLocale() . ' as details',
+        
+        )->get();
+        return view('offers.show',compact('offers'));
     }
-}     
+
+
+}

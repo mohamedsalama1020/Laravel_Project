@@ -19,13 +19,7 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-  <div class="container">
-
-      {{-- Language Switcher --}}
+          {{-- Language Switcher --}}
 <ul class="navbar-nav">
     @php $currentLocale = app()->getLocale(); @endphp
 
@@ -46,65 +40,30 @@
     @endif
 </ul>
 
-
-    </div>
-  </div>
-</nav>
-
-            <div style="text-align: center;">
-                 <h1>{{ __('messages.addoffer') }}</h1>
-            
-            @if (Session::has('success'))
-            
-           
-            <div class="alert alert-success" role="alert">
-                {{ Session::get('success') }}
-            </div>
-             @endif
-             <br>
-            <form method="POST" action="{{ route('offers.store') }}">
-            @csrf
-            <div class="form-group">
-                <label for="EnterOffer">{{ __('messages.offername_en') }}</label>
-                <input type="text" class="form-control" name="name_en" placeholder="{{__('messages.EnterName')}}">
-                @error('name_en')
-                <small class="form-text text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="EnterOffer">{{ __('messages.offername_ar') }}</label>
-                <input type="text" class="form-control" name="name_ar" placeholder="{{__('messages.EnterName')}}">
-                @error('name_ar')
-                <small class="form-text text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="EnterOfferName">{{ __('messages.offerprice') }}</label>
-                <input type="text" class="form-control" name="price" placeholder="Price">
-                 @error('price')
-                <small class="form-text text-danger">{{ $message }}</small>
-
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="EnterOfferName">{{ __('messages.offerdetails_ar') }}</label>
-                <input type="text" class="form-control" name="details_ar" placeholder="Enter Details">
-                @error('details_ar')
-                <small class="form-text text-danger">{{ $message }}</small>
-
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="EnterOfferName">{{ __('messages.offerdetails_en') }}</label>
-                <input type="text" class="form-control" name="details_en" placeholder="Enter Details">
-                @error('details_en')
-                <small class="form-text text-danger">{{ $message }}</small>
-
-                @enderror
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">{{ __('messages.save')}}</button>
-            </form>
-            </div>
+    <body>
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">{{__('messages.offername')}}</th>
+      <th scope="col">{{__('messages.offerprice')}}</th>
+      <th scope="col">{{ __('messages.offerdetails') }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        @foreach ($offers as $offer)
+        
+        
+      <th scope="row">{{ $offer->id }}</th>
+      <td>{{ $offer->name }}</td>
+      <td>{{ $offer->price }}</td>
+      <td>{{ $offer->details }}</td>
+    </tr>
+    @endforeach
+    
+  </tbody>
+</table>
     </body>
+  
 </html>

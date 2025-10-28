@@ -8,9 +8,14 @@ return[
     "offerPriceReq"=>'The Price must be enterd ',
     "offerPriceNum"=>'The Price must be numbers only',
     "addoffer"=>'New Offer',
-    "offername"=>'The Offer Name',
+    "offername_en"=>'The Offer Name in English',
+    "offername_ar"=>'The Offer Name in Arabic',
     "offerprice"=>'Offer Price',
+    "offerdetails_en"=>'Offer Details in English',
+    "offerdetails_ar"=>'Offer Details in Arabic',
+    "offername"=>'The Offer Name',
     "offerdetails"=>'Offer Details',
+
     "EnterName"=>'Enter Name',
     "save"=>'Save'
 
