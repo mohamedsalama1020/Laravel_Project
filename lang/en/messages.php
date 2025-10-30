@@ -17,6 +17,9 @@ return[
     "offerdetails"=>'Offer Details',
     "edit"=>"Edit",
     "updateoffer"=>'Edit offer',
+    "addimage"=>'Add image',
+    "imageph"=>'No image choosen',
+    "delete"=> 'delete',
 
     "EnterName"=>'Enter Name',
     "save"=>'Save'

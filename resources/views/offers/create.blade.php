@@ -62,7 +62,7 @@
             </div>
              @endif
              <br>
-            <form method="POST" action="{{ route('offers.store') }}">
+            <form method="POST" action="{{ route('offers.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="EnterOffer">{{ __('messages.offername_en') }}</label>
@@ -78,6 +78,15 @@
                 <small class="form-text text-danger">{{ $message }}</small>
                 @enderror
             </div>
+
+            <div class="form-group">
+                <label for="EnterOffer">{{ __('messages.addimage') }}</label>
+                <input type="file" class="form-control" name="image" placeholder="{{__('messages.imageph')}}">
+                @error('image')
+                <small class="form-text text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
             <div class="form-group">
                 <label for="EnterOfferName">{{ __('messages.offerprice') }}</label>
                 <input type="text" class="form-control" name="price" placeholder="Price">

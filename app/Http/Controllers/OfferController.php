@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
+use App\Traits\OfferTrait;
 use Illuminate\Http\Request;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization as FacadesLaravelLocalization;
 use Mcamara\LaravelLocalization\LaravelLocalization as LaravelLocalizationLaravelLocalization;
@@ -12,6 +13,8 @@ use function Laravel\Prompts\select;
 
 class OfferController extends Controller
 {
+
+    use OfferTrait;
     public function getOffers(){
         return Offer::select('name')->get();
     }
@@ -21,8 +24,10 @@ class OfferController extends Controller
 
         }
     public function store(OfferRequest $request){
-        
+
+        $file_name= $this->saveImage($request->image,'images/offers');
         Offer::create([
+            'image'=>$file_name,
             'name_ar'=>$request->name_ar,
             'name_en'=>$request->name_en,
             'price'=>$request->price,
@@ -30,7 +35,7 @@ class OfferController extends Controller
             'details_ar'=>$request->details_ar,
 
         ]);
-         return redirect()->back()->with(['success'=>'The offer is done']);   
+         return redirect()->route('offers.show')->with(['success'=>'The offer is done']);   
    
     }
     public function show(){
@@ -38,6 +43,7 @@ class OfferController extends Controller
         'name_' .FacadesLaravelLocalization::getCurrentLocale() . ' as name',
         'price',
         'details_' .FacadesLaravelLocalization::getCurrentLocale() . ' as details',
+        'image'
         
         )->get();
         return view('offers.show',compact('offers'));
@@ -48,7 +54,7 @@ class OfferController extends Controller
         if(!$found)
             return redirect()->back();
         
-        $offer = Offer::select('id','name_ar','name_en','price','details_en','details_ar')->find($id);
+        $offer = Offer::select('id','name_ar','name_en','price','details_en','image','details_ar')->find($id);
         return view('offers.edit',compact('offer'));
 
     }
@@ -59,8 +65,15 @@ class OfferController extends Controller
         if(!$offer)
             return redirect()->back()->with(['error' => 'Offer not found']);
         $offer->update($request->all());
-        return redirect()->back()->with(['success' => 'Updated Successfully']);
+        return redirect()->route('offers.show')->with(['success' => 'Updated Successfully']);
 
+    }
+    public function delete($id){
+        $offer = Offer::find($id);
+        if(!$offer)
+            return redirect()->back()->with('error','not found');
+        $offer->delete();
+        return redirect()->route('offers.show')->with('success','deleted successfully');
 
 
 

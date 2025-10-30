@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Offer extends Model
+class Video extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,14 +13,13 @@ class Offer extends Model
      */
     protected $fillable = [
         'id',
-        'name_ar',
-        'name_en',
-        'price',
-        'details_en',
-        'details_ar',
-        'image'
+        'title',
+        'viewers'
+        
         
     ];
+
+    public $timestamps=false;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -28,7 +27,9 @@ class Offer extends Model
      * @var list<string>
      */
     protected $hidden = [
-        'created_at',
-        'updated_at',
+        
+
     ];
 }
+
+

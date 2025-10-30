@@ -17,6 +17,8 @@ return[
     "offerdetails"=>'تفاصيل العرض',
     "edit"=>'تعديل',
     "updateoffer"=>'تعديل البيانات',
+    "addimage"=>'أضف صورة',
+    "delete"=>'حذف',
 
 
     "EnterName"=>'ادخل اسم',

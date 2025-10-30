@@ -1,16 +1,15 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocalizationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\VideoController;
 
-
-
-
-Route::get('/', function () {
+Route::get('/', action: function () {
     return view('welcome');
 });
 
@@ -36,12 +35,15 @@ Route::group(
         Route::group(['prefix' => 'offers'], function () {
             Route::get('create', [OfferController::class, 'create'])->name('offers.create');
             Route::post('store', [OfferController::class, 'store'])->name('offers.store');
-            Route::get('show',[OfferController::class,'show']);
+            Route::get('show',[OfferController::class,'show'])->name('offers.show');
             Route::get('edit/{id}',[OfferController::class,'editOffer'])->name('offer.edit');
             Route::post('update/{id}', [OfferController::class, 'update'])->name('offers.update');
-
+            Route::get('delete/{id}', [OfferController::class,'delete'] )->name('offer.delete');
+                
+            });
         });
-    }
-);
-   
+    
+;
+Route::get('youtube',[VideoController::class,'getVideo']  )->middleware('auth');
+
 

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name_ar');
             $table->float('price');
             $table->text('details_en');
-             $table->text('details_ar');
+            $table->text('details_ar');
+            $table->string('image');
             $table->timestamps();
             
 
