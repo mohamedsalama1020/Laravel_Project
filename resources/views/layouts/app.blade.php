@@ -76,5 +76,7 @@
             @yield('content')
         </main>
     </div>
+      <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
+        @yield('scripts')
 </body>
 </html>
