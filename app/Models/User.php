@@ -48,4 +48,12 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+
+    ##################################
+
+    public function phone(){
+
+        return $this->hasOne(\App\Models\Phone::class);
+    }
 }

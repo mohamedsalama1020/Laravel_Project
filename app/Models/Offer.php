@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\OfferScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
@@ -18,9 +19,35 @@ class Offer extends Model
         'price',
         'details_en',
         'details_ar',
-        'image'
+        'image',
+        'status'
         
     ];
+            //local scope 
+    /*public function scopeActive($query){ 
+        return $query->where(['status'=>1,'name_en'=>'offer1']);
+
+    }*/
+        // glbal scope
+     /*protected static function booted(): void
+    {
+        static::addGlobalScope(new OfferScope);
+    }*/
+
+    //  accessors 
+    public function getStatusAttribute($value){
+       return $value == 0 ? 'inactive' : 'active';
+
+
+    }
+
+    // mutators
+    public function setNameENAttribute($value){
+       $this -> attributes['name_en']= strtoupper($value);
+
+
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

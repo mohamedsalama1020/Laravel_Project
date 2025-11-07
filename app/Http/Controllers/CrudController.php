@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
+use App\Scopes\OfferScope;
 use App\Traits\OfferTrait;
 use Illuminate\Http\Request;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization as FacadesLaravelLocalization;
@@ -38,7 +39,7 @@ class CrudController extends Controller
          return redirect()->route('offers.show')->with(['success'=>'The offer is done']);   
    
     }
-    public function show(){
+    /*public function show(){
         $offers = Offer::select('id',
         'name_' .FacadesLaravelLocalization::getCurrentLocale() . ' as name',
         'price',
@@ -47,6 +48,18 @@ class CrudController extends Controller
         
         )->get();
         return view('offers.show',compact('offers'));
+    }*/
+
+        // function show() with pagination
+        public function show(){
+        $offers = Offer::select('id',
+        'name_' .FacadesLaravelLocalization::getCurrentLocale() . ' as name',
+        'price',
+        'details_' .FacadesLaravelLocalization::getCurrentLocale() . ' as details',
+        'image'
+        
+        )->paginate(PAGINATION_COUNT);
+        return view('offers.showPagination',compact('offers'));
     }
 
     public function editOffer($id){
@@ -75,9 +88,24 @@ class CrudController extends Controller
         $offer->delete();
         return redirect()->route('offers.show')->with('success','deleted successfully');
 
+    }
+    
+    public function valid_offers(){
+        //return Offer::active()->get();  local scope
+        // return active offers with global scope
+
+        //return  Offer::get();
+        // remove global scope
+        return Offer::withoutGlobalScope(OfferScope::class)->get();
 
 
     }
+    // test accessors and mutatotrs
+    public function get_Offers(){
+        return Offer::select('id','name_en','status')->get();
+
+    }
+
 
 
 }

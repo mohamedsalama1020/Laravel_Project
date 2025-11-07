@@ -26,51 +26,50 @@
             <div class="form-group">
                 <label for="EnterOffer">{{ __('messages.offername_en') }}</label>
                 <input type="text" class="form-control" name="name_en" placeholder="{{__('messages.EnterName')}}">
-                @error('name_en')
-                <small class="form-text text-danger">{{ $message }}</small>
-                @enderror
+                <small id="name_en_error" class="form-text text-danger"></small>
+                
             </div>
               <div class="form-group">
                 <label for="EnterOffer">{{ __('messages.offername_ar') }}</label>
                 <input type="text" class="form-control" name="name_ar" placeholder="{{__('messages.EnterName')}}">
-                @error('name_ar')
-                <small class="form-text text-danger">{{ $message }}</small>
-                @enderror
+                
+                <small id="name_ar_error" class="form-text text-danger"></small>
+               
             </div>
 
             <div class="form-group">
                 <label for="EnterOffer">{{ __('messages.addimage') }}</label>
                 <input type="file" class="form-control" name="image" placeholder="{{__('messages.imageph')}}">
-                @error('image')
-                <small class="form-text text-danger">{{ $message }}</small>
-                @enderror
+                
+                <small id="image_error" class="form-text text-danger"></small>
+                
             </div>
 
             <div class="form-group">
                 <label for="EnterOfferName">{{ __('messages.offerprice') }}</label>
                 <input type="text" class="form-control" name="price" placeholder="Price">
-                 @error('price')
-                <small class="form-text text-danger">{{ $message }}</small>
+                 
+                <small id="price_error" class="form-text text-danger"></small>
 
-                @enderror
+                
             </div>
     
             <div class="form-group">
                 <label for="EnterOfferName">{{ __('messages.offerdetails_ar') }}</label>
                 <input type="text" class="form-control" name="details_ar" placeholder="Enter Details">
-                @error('details_ar')
-                <small class="form-text text-danger">{{ $message }}</small>
+                
+                <small id="details_ar_error" class="form-text text-danger"></small>
 
-                @enderror
+                
             </div>
    
             <div class="form-group">
                 <label for="EnterOfferName">{{ __('messages.offerdetails_en') }}</label>
                 <input type="text" class="form-control" name="details_en" placeholder="Enter Details">
-                @error('details_en')
-                <small class="form-text text-danger">{{ $message }}</small>
+                
+                <small id="details_en_error" class="form-text text-danger"></small>
 
-                @enderror
+                
             </div>
             <br>
             <button id="save" class="btn btn-primary">{{ __('messages.save')}}</button>
@@ -85,8 +84,15 @@
 <script>
 
     $(document).on('click','#save',function(e){
+        // # is id . is class
     
         e.preventDefault();
+        $('#name_en_error').text('');
+        $('#name_ar_error').text('');
+        $('#image_error').text('');
+        $('#price_error').text('');
+        $('#details_ar_error').text('');
+        $('#details_en_error').text('');
 
         var formData = new FormData($('#offerForm')[0]);
         $.ajax({
@@ -106,7 +112,14 @@
                 
         },
 
-        error:function(reject){},
+        error:function(reject){
+            var response = $.parseJSON(reject.responseText);
+            $.each(response.errors,function(key,val){
+                $("#" + key + "_error").text(val[0]);
+            });
+
+
+        },
 
     });
     });
